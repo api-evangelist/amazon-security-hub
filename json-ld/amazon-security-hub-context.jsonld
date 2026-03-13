@@ -1,0 +1,78 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "aws": "https://aws.amazon.com/security-hub/schemas/",
+    "asff": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html#",
+    "Finding": {
+      "@id": "aws:Finding",
+      "@context": {
+        "Id": "schema:identifier",
+        "Title": "schema:name",
+        "Description": "schema:description",
+        "SchemaVersion": "schema:schemaVersion",
+        "ProductArn": "aws:productArn",
+        "GeneratorId": "aws:generatorId",
+        "AwsAccountId": "aws:awsAccountId",
+        "Types": "schema:additionalType",
+        "CreatedAt": "schema:dateCreated",
+        "UpdatedAt": "schema:dateModified",
+        "Severity": "aws:Severity",
+        "Resources": "aws:Resource",
+        "Compliance": "aws:Compliance",
+        "Workflow": "aws:Workflow",
+        "RecordState": "aws:recordState"
+      }
+    },
+    "Severity": {
+      "@id": "aws:Severity",
+      "@context": {
+        "Label": "schema:name",
+        "Normalized": "aws:normalizedSeverity",
+        "Original": "aws:originalSeverity"
+      }
+    },
+    "Resource": {
+      "@id": "aws:Resource",
+      "@context": {
+        "Type": "schema:additionalType",
+        "Id": "schema:identifier",
+        "Partition": "aws:partition",
+        "Region": "schema:locationCreated",
+        "Tags": "schema:keywords",
+        "Details": "aws:resourceDetails"
+      }
+    },
+    "Compliance": {
+      "@id": "aws:Compliance",
+      "@context": {
+        "Status": "aws:complianceStatus",
+        "RelatedRequirements": "aws:relatedRequirements",
+        "SecurityControlId": "schema:identifier"
+      }
+    },
+    "Workflow": {
+      "@id": "aws:Workflow",
+      "@context": {
+        "Status": "aws:workflowStatus"
+      }
+    },
+    "Insight": {
+      "@id": "aws:Insight",
+      "@context": {
+        "InsightArn": "schema:identifier",
+        "Name": "schema:name",
+        "Filters": "aws:filters",
+        "GroupByAttribute": "aws:groupByAttribute"
+      }
+    },
+    "Standard": {
+      "@id": "aws:Standard",
+      "@context": {
+        "StandardsArn": "schema:identifier",
+        "Name": "schema:name",
+        "Description": "schema:description",
+        "EnabledByDefault": "aws:enabledByDefault"
+      }
+    }
+  }
+}

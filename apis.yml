@@ -1,0 +1,67 @@
+name: AWS Security Hub API
+description: AWS Security Hub is a cloud security posture management service that provides a comprehensive view of your security state across AWS accounts. It aggregates, organizes, and prioritizes security findings from multiple AWS services and third-party tools, enabling centralized security monitoring, compliance checking, and automated remediation workflows.
+image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+url: https://aws.amazon.com/security-hub/
+created: '2024-01-15'
+modified: '2026-03-13'
+apis:
+- name: AWS Security Hub API
+  description: >-
+    The AWS Security Hub API provides programmatic access to manage centralized
+    security findings across your AWS environment. It enables developers to
+    import and manage security findings, configure security standards and
+    controls, manage integrations with other AWS services and third-party tools,
+    and automate security workflows.
+  image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  humanURL: https://aws.amazon.com/security-hub/
+  baseURL: https://securityhub.amazonaws.com
+  tags:
+  - Security
+  - Compliance
+  - Monitoring
+  - AWS
+  properties:
+  - type: Documentation
+    url: https://docs.aws.amazon.com/securityhub/
+  - type: OpenAPI
+    url: openapi/amazon-security-hub-openapi.yml
+  - type: Pricing
+    url: https://aws.amazon.com/security-hub/pricing/
+  - type: Getting Started
+    url: https://aws.amazon.com/security-hub/getting-started/
+  - type: FAQ
+    url: https://aws.amazon.com/security-hub/faqs/
+common:
+- type: Portal
+  url: https://aws.amazon.com/
+- type: Website
+  url: https://aws.amazon.com/security-hub/
+- type: Documentation
+  url: https://docs.aws.amazon.com/securityhub/
+- type: Terms of Service
+  url: https://aws.amazon.com/service-terms/
+- type: Privacy Policy
+  url: https://aws.amazon.com/privacy/
+- type: Support
+  url: https://aws.amazon.com/premiumsupport/
+- type: GitHub Organization
+  url: https://github.com/aws
+- type: Console
+  url: https://console.aws.amazon.com/securityhub/
+- type: Sign Up
+  url: https://signin.aws.amazon.com/signup?request_type=register
+- type: Login
+  url: https://aws.amazon.com/console/
+- type: Status
+  url: https://health.aws.amazon.com/health/status
+- type: Contact
+  url: https://aws.amazon.com/contact-us/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  url: https://apievangelist.com
+tags:
+- Security
+- Compliance
+- Monitoring
+- AWS
