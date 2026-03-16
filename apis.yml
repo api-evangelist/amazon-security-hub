@@ -3,7 +3,7 @@ description: AWS Security Hub is a cloud security posture management service tha
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 url: https://aws.amazon.com/security-hub/
 created: '2024-01-15'
-modified: '2026-03-13'
+modified: '2026-03-16'
 apis:
 - name: AWS Security Hub API
   description: >-
