@@ -17,7 +17,7 @@ paths:
   /accounts:
     post:
       operationId: EnableSecurityHub
-      summary: Enable Security Hub
+      summary: Amazon Security Hub Enable Security Hub
       description: Enables Security Hub for your account in the current Region or the Region you specify in the request.
       requestBody:
         required: false
@@ -47,7 +47,7 @@ paths:
   /findings:
     post:
       operationId: GetFindings
-      summary: Get Findings
+      summary: Amazon Security Hub Get Findings
       description: Returns a list of findings that match the specified criteria, with filtering, sorting, and pagination support.
       requestBody:
         required: false
@@ -114,7 +114,7 @@ paths:
   /findings/import:
     post:
       operationId: BatchImportFindings
-      summary: Batch Import Findings
+      summary: Amazon Security Hub Batch Import Findings
       description: Imports security findings generated from an integrated third-party product into Security Hub.
       requestBody:
         required: true
@@ -152,7 +152,7 @@ paths:
   /insights:
     post:
       operationId: GetInsights
-      summary: Get Insights
+      summary: Amazon Security Hub Get Insights
       description: Lists and describes insights for the specified insight ARNs or returns all insights.
       requestBody:
         required: false
@@ -198,7 +198,7 @@ paths:
   /productSubscriptions:
     post:
       operationId: EnableImportFindingsForProduct
-      summary: Enable Import Findings For Product
+      summary: Amazon Security Hub Enable Import Findings For Product
       description: Enables the integration of a partner product with Security Hub, allowing import of findings from that product.
       requestBody:
         required: true
@@ -228,7 +228,7 @@ paths:
   /standards:
     get:
       operationId: DescribeStandards
-      summary: Describe Standards
+      summary: Amazon Security Hub Describe Standards
       description: Returns a list of the available security standards, including the name, description, and subscription status.
       parameters:
         - name: NextToken
