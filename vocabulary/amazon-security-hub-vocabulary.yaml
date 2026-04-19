@@ -1,0 +1,175 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Amazon Security Hub"
+  description: "Unified taxonomy mapping operational and capability dimensions of the Amazon Security Hub API for cloud security posture management."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: amazon-security-hub
+      version: "2018-10-26"
+      baseUrl: https://securityhub.{region}.amazonaws.com
+      status: active
+
+  resources:
+    - name: Findings
+      api: amazon-security-hub
+      actions: [Get, BatchImport, BatchUpdate, Delete]
+    - name: Standards
+      api: amazon-security-hub
+      actions: [Enable, Disable, Get]
+    - name: Controls
+      api: amazon-security-hub
+      actions: [Describe, Update]
+    - name: Insights
+      api: amazon-security-hub
+      actions: [Create, Get, Update, Delete]
+    - name: Integrations
+      api: amazon-security-hub
+      actions: [List, Enable, Disable]
+    - name: Hub
+      api: amazon-security-hub
+      actions: [Enable, Disable, Describe, Update]
+
+  actions:
+    - name: Get
+      httpMethods: [GET]
+      pattern: read
+    - name: BatchImport
+      httpMethods: [POST]
+      pattern: write
+    - name: BatchUpdate
+      httpMethods: [PATCH]
+      pattern: write
+    - name: Enable
+      httpMethods: [POST]
+      pattern: write
+    - name: Disable
+      httpMethods: [DELETE]
+      pattern: destructive
+    - name: Describe
+      httpMethods: [GET]
+      pattern: read
+    - name: Create
+      httpMethods: [POST]
+      pattern: write
+    - name: Update
+      httpMethods: [PATCH]
+      pattern: write
+    - name: Delete
+      httpMethods: [DELETE]
+      pattern: destructive
+    - name: List
+      httpMethods: [GET]
+      pattern: read
+
+  schemas:
+    core:
+      - name: Finding
+        description: A security finding aggregated by Security Hub conforming to the AWS Security Finding Format (ASFF)
+
+  parameters:
+    pagination:
+      - name: NextToken
+        description: Token for paginating through result sets
+      - name: MaxResults
+        description: Maximum number of results to return per page
+    filters:
+      - name: Filters
+        description: Filter criteria for findings (severity, workflow status, product, etc.)
+    identifiers:
+      - name: FindingId
+        description: Unique identifier for a security finding
+      - name: StandardsSubscriptionArn
+        description: ARN of a standards subscription
+
+  enums:
+    severity:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFORMATIONAL
+    workflowStatus:
+      - NEW
+      - NOTIFIED
+      - RESOLVED
+      - SUPPRESSED
+    recordState:
+      - ACTIVE
+      - ARCHIVED
+    complianceStatus:
+      - PASSED
+      - FAILED
+      - NOT_AVAILABLE
+      - WARNING
+
+  authentication:
+    schemes:
+      - type: AWS Signature V4
+        description: AWS IAM-based request signing
+        apis: [all]
+
+capability:
+  workflows:
+    - name: Cloud Security Posture
+      file: capabilities/cloud-security-posture.yaml
+      description: Centralized cloud security posture management including findings, compliance standards, controls, and insights
+      apisConsumed: [amazon-security-hub]
+      toolCount: 6
+      personas: [Cloud Security Engineer, SOC Analyst]
+      domains: [Security, Compliance]
+
+  personas:
+    - id: cloud-security-engineer
+      name: Cloud Security Engineer
+      description: Engineers who configure security standards, manage controls, and remediate findings
+      workflows: [Cloud Security Posture]
+    - id: soc-analyst
+      name: SOC Analyst
+      description: Analysts who investigate security findings and track remediation workflows
+      workflows: [Cloud Security Posture]
+
+  domains:
+    - name: Security
+      description: Cloud security posture and finding management across AWS accounts
+      resources: [Findings, Insights]
+    - name: Compliance
+      description: Security standards compliance monitoring and control management
+      resources: [Standards, Controls]
+
+  namespaces:
+    consumed:
+      - amazon-security-hub
+    rest:
+      - cloud-security-posture-api (port 8080)
+    mcp:
+      - cloud-security-posture-mcp (port 9090)
+
+  binds:
+    - name: AWS_ACCESS_KEY_ID
+      workflows: [Cloud Security Posture]
+    - name: AWS_SECRET_ACCESS_KEY
+      workflows: [Cloud Security Posture]
+    - name: AWS_REGION
+      workflows: [Cloud Security Posture]
+
+crossReference:
+  - resource: Findings
+    operations: [GetFindings, BatchImportFindings, BatchUpdateFindings]
+    workflows: [Cloud Security Posture]
+    personas: [Cloud Security Engineer, SOC Analyst]
+  - resource: Standards
+    operations: [GetEnabledStandards]
+    workflows: [Cloud Security Posture]
+    personas: [Cloud Security Engineer]
+  - resource: Controls
+    operations: [DescribeStandardsControls]
+    workflows: [Cloud Security Posture]
+    personas: [Cloud Security Engineer]
+  - resource: Insights
+    operations: [GetInsights]
+    workflows: [Cloud Security Posture]
+    personas: [Cloud Security Engineer, SOC Analyst]

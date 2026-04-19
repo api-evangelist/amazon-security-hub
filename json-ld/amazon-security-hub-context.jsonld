@@ -1,78 +1,72 @@
 {
   "@context": {
-    "@vocab": "https://schema.org/",
-    "aws": "https://aws.amazon.com/security-hub/schemas/",
-    "asff": "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html#",
-    "Finding": {
-      "@id": "aws:Finding",
-      "@context": {
-        "Id": "schema:identifier",
-        "Title": "schema:name",
-        "Description": "schema:description",
-        "SchemaVersion": "schema:schemaVersion",
-        "ProductArn": "aws:productArn",
-        "GeneratorId": "aws:generatorId",
-        "AwsAccountId": "aws:awsAccountId",
-        "Types": "schema:additionalType",
-        "CreatedAt": "schema:dateCreated",
-        "UpdatedAt": "schema:dateModified",
-        "Severity": "aws:Severity",
-        "Resources": "aws:Resource",
-        "Compliance": "aws:Compliance",
-        "Workflow": "aws:Workflow",
-        "RecordState": "aws:recordState"
-      }
+    "@version": 1.1,
+    "aws": "https://aws.amazon.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Finding": "aws:Finding",
+    "SchemaVersion": {
+      "@id": "aws:SchemaVersion",
+      "@type": "xsd:string"
+    },
+    "Id": {
+      "@id": "aws:Id",
+      "@type": "xsd:string"
+    },
+    "ProductArn": {
+      "@id": "aws:ProductArn",
+      "@type": "xsd:string"
+    },
+    "GeneratorId": {
+      "@id": "aws:GeneratorId",
+      "@type": "xsd:string"
+    },
+    "AwsAccountId": {
+      "@id": "aws:AwsAccountId",
+      "@type": "xsd:string"
+    },
+    "Types": {
+      "@id": "aws:Types",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "CreatedAt": {
+      "@id": "aws:CreatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "UpdatedAt": {
+      "@id": "aws:UpdatedAt",
+      "@type": "xsd:dateTime"
     },
     "Severity": {
       "@id": "aws:Severity",
-      "@context": {
-        "Label": "schema:name",
-        "Normalized": "aws:normalizedSeverity",
-        "Original": "aws:originalSeverity"
-      }
+      "@type": "xsd:string"
     },
-    "Resource": {
-      "@id": "aws:Resource",
-      "@context": {
-        "Type": "schema:additionalType",
-        "Id": "schema:identifier",
-        "Partition": "aws:partition",
-        "Region": "schema:locationCreated",
-        "Tags": "schema:keywords",
-        "Details": "aws:resourceDetails"
-      }
+    "Title": {
+      "@id": "aws:Title",
+      "@type": "xsd:string"
+    },
+    "Description": {
+      "@id": "aws:Description",
+      "@type": "xsd:string"
+    },
+    "Resources": {
+      "@id": "aws:Resources",
+      "@container": "@set",
+      "@type": "xsd:string"
     },
     "Compliance": {
       "@id": "aws:Compliance",
-      "@context": {
-        "Status": "aws:complianceStatus",
-        "RelatedRequirements": "aws:relatedRequirements",
-        "SecurityControlId": "schema:identifier"
-      }
+      "@type": "xsd:string"
     },
     "Workflow": {
       "@id": "aws:Workflow",
-      "@context": {
-        "Status": "aws:workflowStatus"
-      }
+      "@type": "xsd:string"
     },
-    "Insight": {
-      "@id": "aws:Insight",
-      "@context": {
-        "InsightArn": "schema:identifier",
-        "Name": "schema:name",
-        "Filters": "aws:filters",
-        "GroupByAttribute": "aws:groupByAttribute"
-      }
-    },
-    "Standard": {
-      "@id": "aws:Standard",
-      "@context": {
-        "StandardsArn": "schema:identifier",
-        "Name": "schema:name",
-        "Description": "schema:description",
-        "EnabledByDefault": "aws:enabledByDefault"
-      }
+    "RecordState": {
+      "@id": "aws:RecordState",
+      "@type": "xsd:string"
     }
   }
 }

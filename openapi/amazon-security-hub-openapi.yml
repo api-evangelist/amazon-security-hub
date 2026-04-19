@@ -1,7 +1,8 @@
 openapi: 3.0.0
 info:
   title: Amazon Security Hub
-  description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.
+  description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS 
+    accounts.
   version: '2018-10-26'
   contact:
     name: Kin Lane
@@ -11,8 +12,8 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-  - url: https://securityhub.amazonaws.com
-    description: Amazon Security Hub API endpoint
+- url: https://securityhub.amazonaws.com
+  description: Amazon Security Hub API endpoint
 paths:
   /accounts:
     post:
@@ -36,14 +37,17 @@ paths:
                 ControlFindingGenerator:
                   type: string
                   enum:
-                    - STANDARD_CONTROL
-                    - SECURITY_CONTROL
+                  - STANDARD_CONTROL
+                  - SECURITY_CONTROL
       responses:
         '200':
           description: Security Hub enabled successfully.
       tags:
-        - Administration
+      - Administration
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /findings:
     post:
       operationId: GetFindings
@@ -86,8 +90,8 @@ paths:
                       SortOrder:
                         type: string
                         enum:
-                          - asc
-                          - desc
+                        - asc
+                        - desc
                 NextToken:
                   type: string
                 MaxResults:
@@ -108,9 +112,19 @@ paths:
                       $ref: '#/components/schemas/Finding'
                   NextToken:
                     type: string
+              examples:
+                GetFindings200Example:
+                  summary: Default GetFindings 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
       tags:
-        - Findings
+      - Findings
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /findings/import:
     post:
       operationId: BatchImportFindings
@@ -129,7 +143,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Finding'
               required:
-                - Findings
+              - Findings
       responses:
         '200':
           description: Batch import results.
@@ -146,9 +160,19 @@ paths:
                     type: array
                     items:
                       type: object
+              examples:
+                BatchImportFindings200Example:
+                  summary: Default BatchImportFindings 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
       tags:
-        - Findings
+      - Findings
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /insights:
     post:
       operationId: GetInsights
@@ -192,13 +216,23 @@ paths:
                           type: string
                   NextToken:
                     type: string
+              examples:
+                GetInsights200Example:
+                  summary: Default GetInsights 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
       tags:
-        - Insights
+      - Insights
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /productSubscriptions:
     post:
       operationId: EnableImportFindingsForProduct
-      summary: Amazon Security Hub Enable Import Findings For Product
+      summary: Amazon Security Hub Enable Import Findings for Product
       description: Enables the integration of a partner product with Security Hub, allowing import of findings from that product.
       requestBody:
         required: true
@@ -211,7 +245,7 @@ paths:
                   type: string
                   description: The ARN of the product to enable the integration for.
               required:
-                - ProductArn
+              - ProductArn
       responses:
         '200':
           description: Product subscription enabled.
@@ -222,23 +256,33 @@ paths:
                 properties:
                   ProductSubscriptionArn:
                     type: string
+              examples:
+                EnableImportFindingsForProduct200Example:
+                  summary: Default EnableImportFindingsForProduct 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
       tags:
-        - Integrations
+      - Integrations
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /standards:
     get:
       operationId: DescribeStandards
       summary: Amazon Security Hub Describe Standards
       description: Returns a list of the available security standards, including the name, description, and subscription status.
       parameters:
-        - name: NextToken
-          in: query
-          schema:
-            type: string
-        - name: MaxResults
-          in: query
-          schema:
-            type: integer
+      - name: NextToken
+        in: query
+        schema:
+          type: string
+      - name: MaxResults
+        in: query
+        schema:
+          type: integer
       responses:
         '200':
           description: List of standards.
@@ -262,9 +306,19 @@ paths:
                           type: boolean
                   NextToken:
                     type: string
+              examples:
+                DescribeStandards200Example:
+                  summary: Default DescribeStandards 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
       tags:
-        - Standards
+      - Standards
 
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   schemas:
     Finding:
@@ -306,11 +360,11 @@ components:
             Label:
               type: string
               enum:
-                - INFORMATIONAL
-                - LOW
-                - MEDIUM
-                - HIGH
-                - CRITICAL
+              - INFORMATIONAL
+              - LOW
+              - MEDIUM
+              - HIGH
+              - CRITICAL
             Normalized:
               type: integer
               minimum: 0
@@ -343,10 +397,10 @@ components:
             Status:
               type: string
               enum:
-                - PASSED
-                - WARNING
-                - FAILED
-                - NOT_AVAILABLE
+              - PASSED
+              - WARNING
+              - FAILED
+              - NOT_AVAILABLE
             RelatedRequirements:
               type: array
               items:
@@ -357,36 +411,36 @@ components:
             Status:
               type: string
               enum:
-                - NEW
-                - NOTIFIED
-                - RESOLVED
-                - SUPPRESSED
+              - NEW
+              - NOTIFIED
+              - RESOLVED
+              - SUPPRESSED
         RecordState:
           type: string
           enum:
-            - ACTIVE
-            - ARCHIVED
+          - ACTIVE
+          - ARCHIVED
       required:
-        - SchemaVersion
-        - Id
-        - ProductArn
-        - GeneratorId
-        - AwsAccountId
-        - CreatedAt
-        - UpdatedAt
-        - Severity
-        - Title
-        - Description
-        - Resources
+      - SchemaVersion
+      - Id
+      - ProductArn
+      - GeneratorId
+      - AwsAccountId
+      - CreatedAt
+      - UpdatedAt
+      - Severity
+      - Title
+      - Description
+      - Resources
 
 tags:
-  - name: Administration
-    description: Operations for enabling and configuring Security Hub.
-  - name: Findings
-    description: Operations for managing security findings.
-  - name: Insights
-    description: Operations for managing security insights.
-  - name: Integrations
-    description: Operations for managing product integrations.
-  - name: Standards
-    description: Operations for managing security standards.
+- name: Administration
+  description: Operations for enabling and configuring Security Hub.
+- name: Findings
+  description: Operations for managing security findings.
+- name: Insights
+  description: Operations for managing security insights.
+- name: Integrations
+  description: Operations for managing product integrations.
+- name: Standards
+  description: Operations for managing security standards.

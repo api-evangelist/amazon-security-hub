@@ -1,7 +1,7 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-security-hub/refs/heads/main/json-schema/amazon-security-hub-finding-schema.json",
-  "title": "Finding",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-security-hub/refs/heads/main/json-structure/amazon-security-hub-finding-structure.json",
+  "name": "Finding",
   "description": "An AWS Security Finding Format (ASFF) finding object that provides a normalized format for security findings.",
   "type": "object",
   "properties": {

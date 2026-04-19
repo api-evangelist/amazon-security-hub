@@ -1,0 +1,144 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Amazon Security Hub Cloud Security Posture"
+  description: "Unified capability for cloud security posture management including findings aggregation, compliance standards monitoring, and security insights. Used by Cloud Security Engineers and SOC Analysts."
+  tags:
+    - Amazon Security Hub
+    - Security
+    - Compliance
+    - CSPM
+    - AWS
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+      AWS_REGION: AWS_REGION
+
+capability:
+  consumes:
+    - import: amazon-security-hub
+      location: ./shared/amazon-security-hub.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: cloud-security-posture-api
+      description: "Unified REST API for Amazon Security Hub cloud security posture management."
+      resources:
+        - path: /v1/findings
+          name: findings
+          description: "Security findings from across your AWS environment"
+          operations:
+            - method: GET
+              name: list-findings
+              description: "List and filter security findings"
+              call: "amazon-security-hub.get-findings"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: import-findings
+              description: "Import findings from custom security tools"
+              call: "amazon-security-hub.batch-import-findings"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/standards
+          name: standards
+          description: "Compliance security standards monitoring"
+          operations:
+            - method: GET
+              name: list-standards
+              description: "List enabled compliance standards"
+              call: "amazon-security-hub.get-enabled-standards"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/controls
+          name: controls
+          description: "Security controls status and configuration"
+          operations:
+            - method: GET
+              name: list-controls
+              description: "List security controls and their compliance status"
+              call: "amazon-security-hub.describe-standards-controls"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/insights
+          name: insights
+          description: "Aggregated security insights across your environment"
+          operations:
+            - method: GET
+              name: list-insights
+              description: "List security insights and trends"
+              call: "amazon-security-hub.get-insights"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: cloud-security-posture-mcp
+      transport: http
+      description: "MCP server for AI-assisted Amazon Security Hub cloud security posture management."
+      tools:
+        - name: get-security-findings
+          description: "Get and filter security findings from Amazon Security Hub"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "amazon-security-hub.get-findings"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: import-security-findings
+          description: "Import custom security findings into Amazon Security Hub"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "amazon-security-hub.batch-import-findings"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-findings
+          description: "Update security findings notes and status"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "amazon-security-hub.batch-update-findings"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-compliance-standards
+          description: "List enabled compliance standards like CIS, PCI DSS, SOC 2"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "amazon-security-hub.get-enabled-standards"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-security-controls
+          description: "List security controls and check their compliance status"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "amazon-security-hub.describe-standards-controls"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-security-insights
+          description: "Get aggregated security insights and trend analysis"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "amazon-security-hub.get-insights"
+          outputParameters:
+            - type: object
+              mapping: "$."

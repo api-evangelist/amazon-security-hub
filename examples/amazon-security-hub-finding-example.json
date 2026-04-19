@@ -1,0 +1,17 @@
+{
+  "SchemaVersion": "example-SchemaVersion",
+  "Id": "finding-a1b2c3d4",
+  "ProductArn": "arn:aws:securityhub:us-east-1:123456789012:hub/default",
+  "GeneratorId": "finding-a1b2c3d4",
+  "AwsAccountId": "123456789012",
+  "Types": [],
+  "CreatedAt": "example-CreatedAt",
+  "UpdatedAt": "2025-03-15T14:30:00Z",
+  "Severity": {},
+  "Title": "example-Title",
+  "Description": "example-Description",
+  "Resources": [],
+  "Compliance": {},
+  "Workflow": {},
+  "RecordState": "example-RecordState"
+}
