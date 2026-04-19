@@ -1,7 +1,7 @@
-# Amazon Security Hub (amazon-security-hub)
+# Amazon Security Hub
 AWS Security Hub is a cloud security posture management service that provides a comprehensive view of your security state across AWS accounts. It aggregates, organizes, and prioritizes security findings from multiple AWS services and third-party tools, enabling centralized security monitoring, compliance checking, and automated remediation workflows.
 
-**URL:** [Visit Amazon Security Hub](https://aws.amazon.com/security-hub/)
+**URL:** [Visit APIs.json URL](https://aws.amazon.com/security-hub/)
 
 **Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
 
@@ -29,7 +29,7 @@ The AWS Security Hub API provides programmatic access to manage centralized secu
 
 - [Documentation](https://docs.aws.amazon.com/securityhub/latest/APIReference/)
 - [OpenAPI](openapi/amazon-security-hub-openapi.yml)
-- [JSONSchema - Finding](json-schema/amazon-security-hub-finding-schema.json)
+- [JSONSchema](json-schema/amazon-security-hub-finding-schema.json)
 
 ## Common Properties
 
@@ -38,6 +38,7 @@ The AWS Security Hub API provides programmatic access to manage centralized secu
 - [Documentation](https://docs.aws.amazon.com/securityhub/)
 - [APIReference](https://docs.aws.amazon.com/securityhub/latest/APIReference/)
 - [Console](https://console.aws.amazon.com/securityhub/)
+- [SignUp](https://signin.aws.amazon.com/signup?request_type=register)
 - [Pricing](https://aws.amazon.com/security-hub/pricing/)
 - [FAQ](https://aws.amazon.com/security-hub/faqs/)
 - [Blog](https://aws.amazon.com/blogs/security/)
@@ -45,9 +46,18 @@ The AWS Security Hub API provides programmatic access to manage centralized secu
 - [Support](https://aws.amazon.com/premiumsupport/)
 - [TermsOfService](https://aws.amazon.com/service-terms/)
 - [PrivacyPolicy](https://aws.amazon.com/privacy/)
+- [Compliance](https://aws.amazon.com/compliance/)
 - [GitHubOrganization](https://github.com/aws)
 - [YouTube](https://www.youtube.com/user/AmazonWebServices)
 - [StackOverflow](https://stackoverflow.com/questions/tagged/aws-security-hub)
+- [KnowledgeCenter](https://repost.aws/knowledge-center)
+- [SpectralRules](rules/amazon-security-hub-spectral-rules.yml)
+- [Vocabulary](vocabulary/amazon-security-hub-vocabulary.yaml)
+- [NaftikoCapability](capabilities/cloud-security-posture.yaml)
+- [JSON-LD](json-ld/amazon-security-hub-context.jsonld)
+- [JSONStructure](json-structure/amazon-security-hub-finding-structure.json)
+- [Example](examples/amazon-security-hub-finding-example.json)
+- [NaftikoCapability](capabilities/shared/amazon-security-hub.yaml)
 
 ## Features
 
@@ -94,23 +104,23 @@ Machine-readable API specifications organized by format.
 
 ### OpenAPI
 
-- [AWS Security Hub API](openapi/amazon-security-hub-openapi.yml)
+- [amazon-security-hub-openapi.yml](openapi/amazon-security-hub-openapi.yml)
 
 ### JSON Schema
 
-- [Finding](json-schema/amazon-security-hub-finding-schema.json)
+- [amazon-security-hub-finding-schema.json](json-schema/amazon-security-hub-finding-schema.json)
 
 ### JSON Structure
 
-- [Finding](json-structure/amazon-security-hub-finding-structure.json)
+- [amazon-security-hub-finding-structure.json](json-structure/amazon-security-hub-finding-structure.json)
 
 ### JSON-LD
 
-- [Amazon Security Hub Context](json-ld/amazon-security-hub-context.jsonld)
+- [amazon-security-hub-context.jsonld](json-ld/amazon-security-hub-context.jsonld)
 
 ### Examples
 
-- [Finding Example](examples/amazon-security-hub-finding-example.json)
+- [amazon-security-hub-finding-example.json](examples/amazon-security-hub-finding-example.json)
 
 ## Capabilities
 
@@ -118,24 +128,23 @@ Naftiko capabilities organized as shared per-API definitions composed into custo
 
 ### Shared Per-API Definitions
 
-- [Amazon Security Hub API](capabilities/shared/amazon-security-hub.yaml) — 5 operations for findings, standards, controls, and insights management
+- [amazon-security-hub.yaml](capabilities/shared/amazon-security-hub.yaml)
 
 ### Workflow Capabilities
 
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [Cloud Security Posture](capabilities/cloud-security-posture.yaml) | Amazon Security Hub | 6 | Cloud Security Engineer, SOC Analyst |
+- [cloud-security-posture.yaml](capabilities/cloud-security-posture.yaml)
 
 ## Vocabulary
 
-- [Amazon Security Hub Vocabulary](vocabulary/amazon-security-hub-vocabulary.yaml) — Unified taxonomy mapping 6 resources, 10 actions, 1 workflow, and 2 personas across operational (OpenAPI) and capability (Naftiko) dimensions
+- [amazon-security-hub-vocabulary.yaml](vocabulary/amazon-security-hub-vocabulary.yaml)
 
 ## Rules
 
-- [Amazon Security Hub Spectral Rules](rules/amazon-security-hub-spectral-rules.yml) — 18 rules across 8 categories enforcing Amazon Security Hub API conventions
+- [amazon-security-hub-spectral-rules.yml](rules/amazon-security-hub-spectral-rules.yml)
 
 ## Maintainers
 
 **FN:** Kin Lane
 
 **Email:** kin@apievangelist.com
+
