@@ -7,7 +7,7 @@ description: >-
   and automated remediation workflows.
 url: https://aws.amazon.com/security-hub/
 baseURL: https://securityhub.amazonaws.com
-x-type: company
+kind: company
 created: '2024-01-15'
 modified: '2026-04-19'
 
@@ -163,7 +163,7 @@ common:
   - name: Palo Alto Networks
     description: Ingest Prisma Cloud and other Palo Alto findings via Security Hub integration.
 
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/amazon-security-hub-context.jsonld
 - type: JSONStructure
   url: json-structure/amazon-security-hub-finding-structure.json
