@@ -1,0 +1,77 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Security Hub — Insights
+  description: 'Amazon Security Hub — Insights. 1 operations. Lead operation: Amazon Security Hub Get Insights. Self-contained
+    Naftiko capability covering one Amazon Security Hub business surface.'
+  tags:
+  - Amazon Security Hub
+  - Insights
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_SECURITY_HUB_API_KEY: AMAZON_SECURITY_HUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-security-hub-insights
+    baseUri: https://securityhub.amazonaws.com
+    description: Amazon Security Hub — Insights business capability. Self-contained, no shared references.
+    resources:
+    - name: insights
+      path: /insights
+      operations:
+      - name: getinsights
+        method: POST
+        description: Amazon Security Hub Get Insights
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+  exposes:
+  - type: rest
+    namespace: amazon-security-hub-insights-rest
+    port: 8080
+    description: REST adapter for Amazon Security Hub — Insights. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/insights
+      name: insights
+      description: REST surface for insights.
+      operations:
+      - method: POST
+        name: getinsights
+        description: Amazon Security Hub Get Insights
+        call: amazon-security-hub-insights.getinsights
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-security-hub-insights-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Security Hub — Insights. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amazon-security-hub-get-insights
+      description: Amazon Security Hub Get Insights
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-security-hub-insights.getinsights
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

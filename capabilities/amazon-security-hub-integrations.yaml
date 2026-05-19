@@ -1,0 +1,77 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Security Hub — Integrations
+  description: 'Amazon Security Hub — Integrations. 1 operations. Lead operation: Amazon Security Hub Enable Import Findings
+    for Product. Self-contained Naftiko capability covering one Amazon Security Hub business surface.'
+  tags:
+  - Amazon Security Hub
+  - Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_SECURITY_HUB_API_KEY: AMAZON_SECURITY_HUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-security-hub-integrations
+    baseUri: https://securityhub.amazonaws.com
+    description: Amazon Security Hub — Integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: productSubscriptions
+      path: /productSubscriptions
+      operations:
+      - name: enableimportfindingsforproduct
+        method: POST
+        description: Amazon Security Hub Enable Import Findings for Product
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: amazon-security-hub-integrations-rest
+    port: 8080
+    description: REST adapter for Amazon Security Hub — Integrations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/productsubscriptions
+      name: productsubscriptions
+      description: REST surface for productSubscriptions.
+      operations:
+      - method: POST
+        name: enableimportfindingsforproduct
+        description: Amazon Security Hub Enable Import Findings for Product
+        call: amazon-security-hub-integrations.enableimportfindingsforproduct
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-security-hub-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Security Hub — Integrations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-security-hub-enable-import
+      description: Amazon Security Hub Enable Import Findings for Product
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-security-hub-integrations.enableimportfindingsforproduct
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

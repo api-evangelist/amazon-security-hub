@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Security Hub — Standards
+  description: 'Amazon Security Hub — Standards. 1 operations. Lead operation: Amazon Security Hub Describe Standards. Self-contained
+    Naftiko capability covering one Amazon Security Hub business surface.'
+  tags:
+  - Amazon Security Hub
+  - Standards
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_SECURITY_HUB_API_KEY: AMAZON_SECURITY_HUB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-security-hub-standards
+    baseUri: https://securityhub.amazonaws.com
+    description: Amazon Security Hub — Standards business capability. Self-contained, no shared references.
+    resources:
+    - name: standards
+      path: /standards
+      operations:
+      - name: describestandards
+        method: GET
+        description: Amazon Security Hub Describe Standards
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: NextToken
+          in: query
+          type: string
+        - name: MaxResults
+          in: query
+          type: integer
+  exposes:
+  - type: rest
+    namespace: amazon-security-hub-standards-rest
+    port: 8080
+    description: REST adapter for Amazon Security Hub — Standards. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/standards
+      name: standards
+      description: REST surface for standards.
+      operations:
+      - method: GET
+        name: describestandards
+        description: Amazon Security Hub Describe Standards
+        call: amazon-security-hub-standards.describestandards
+        with:
+          NextToken: rest.NextToken
+          MaxResults: rest.MaxResults
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-security-hub-standards-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Security Hub — Standards. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amazon-security-hub-describe-standards
+      description: Amazon Security Hub Describe Standards
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-security-hub-standards.describestandards
+      with:
+        NextToken: tools.NextToken
+        MaxResults: tools.MaxResults
+      outputParameters:
+      - type: object
+        mapping: $.
