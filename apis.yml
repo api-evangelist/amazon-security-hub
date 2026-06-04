@@ -42,6 +42,27 @@ apis:
   - type: NaftikoCapability
     url: capabilities/amazon-security-hub-standards.yaml
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amazon-security-hub-bootstrap-posture-baseline-workflow.yml
+    name: Amazon Security Hub Bootstrap Posture Baseline
+    summary: Enable Security Hub, confirm its standards, and capture an initial findings baseline.
+  - url: arazzo/amazon-security-hub-enable-hub-and-review-standards-workflow.yml
+    name: Amazon Security Hub Enable Hub and Review Standards
+    summary: Enable Security Hub for the account and review which security standards are now available.
+  - url: arazzo/amazon-security-hub-onboard-product-integration-workflow.yml
+    name: Amazon Security Hub Onboard Product Integration
+    summary: Enable a partner product integration and verify its findings flow into Security Hub.
+  - url: arazzo/amazon-security-hub-review-insight-findings-workflow.yml
+    name: Amazon Security Hub Review Insight Findings
+    summary: List a saved insight and drill into the findings behind it.
+  - url: arazzo/amazon-security-hub-standards-compliance-audit-workflow.yml
+    name: Amazon Security Hub Standards Compliance Audit
+    summary: List the enabled security standards and pull the failing compliance findings behind them.
+  - url: arazzo/amazon-security-hub-triage-and-update-findings-workflow.yml
+    name: Amazon Security Hub Triage and Update Findings
+    summary: Retrieve high-severity findings and update them by re-importing the modified records.
 - type: Portal
   url: https://aws.amazon.com/
 - type: GettingStarted

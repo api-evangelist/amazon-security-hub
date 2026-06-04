@@ -1,0 +1,83 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Security Hub Standards Compliance Audit
+  summary: List the enabled security standards and pull the failing compliance findings behind them.
+  description: >-
+    A standards compliance audit. The workflow lists the available security
+    standards to establish which baseline controls are in scope, then queries
+    the findings store for control findings whose compliance status is failing
+    so an auditor can see exactly where the account drifts from the standards.
+    The specification does not expose a per-control enable operation, so the
+    supported path is to enumerate standards and inspect their compliance
+    findings; this adaptation is noted here. Each step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: securityHubApi
+  url: ../openapi/amazon-security-hub-openapi.yml
+  type: openapi
+workflows:
+- workflowId: standards-compliance-audit
+  summary: List standards, then retrieve failing compliance findings.
+  description: >-
+    Enumerates the available security standards, then queries findings filtered
+    to a failing compliance status to surface where the account violates those
+    standards.
+  inputs:
+    type: object
+    properties:
+      complianceStatus:
+        type: string
+        description: The compliance status value to filter control findings by.
+        default: FAILED
+      severityLabel:
+        type: string
+        description: The severity label value to further filter the control findings.
+        default: HIGH
+      maxResults:
+        type: integer
+        description: The maximum number of findings to return for the audit.
+        default: 100
+  steps:
+  - stepId: listStandards
+    description: >-
+      Enumerate the available security standards so the auditor knows which
+      baseline controls are in scope before reviewing compliance findings.
+    operationId: DescribeStandards
+    parameters:
+    - name: MaxResults
+      in: query
+      value: $inputs.maxResults
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      standards: $response.body#/Standards
+      firstStandardArn: $response.body#/Standards/0/StandardsArn
+  - stepId: getFailingControls
+    description: >-
+      Query the findings store for control findings whose compliance status is
+      failing so the auditor can see where the account drifts from the standards.
+    operationId: GetFindings
+    requestBody:
+      contentType: application/json
+      payload:
+        Filters:
+          ComplianceStatus:
+          - Value: $inputs.complianceStatus
+            Comparison: EQUALS
+          SeverityLabel:
+          - Value: $inputs.severityLabel
+            Comparison: EQUALS
+        SortCriteria:
+        - Field: SeverityNormalized
+          SortOrder: desc
+        MaxResults: $inputs.maxResults
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      failingFindings: $response.body#/Findings
+      nextToken: $response.body#/NextToken
+  outputs:
+    standards: $steps.listStandards.outputs.standards
+    failingFindings: $steps.getFailingControls.outputs.failingFindings

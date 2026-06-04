@@ -1,0 +1,90 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Security Hub Triage and Update Findings
+  summary: Retrieve high-severity findings and update them by re-importing the modified records.
+  description: >-
+    A findings triage loop. The workflow queries Security Hub for findings that
+    match a severity filter, then updates the matched findings by re-importing
+    them through the batch import operation with revised workflow status and
+    severity fields. The specification exposes batch import rather than a
+    dedicated batch update operation, so the supported update path is to
+    re-import the same finding identifiers with the changed attributes; this
+    adaptation is noted here. Each step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: securityHubApi
+  url: ../openapi/amazon-security-hub-openapi.yml
+  type: openapi
+workflows:
+- workflowId: triage-and-update-findings
+  summary: Get findings by severity, then update them via re-import.
+  description: >-
+    Retrieves findings filtered by severity label and compliance status, then
+    re-imports the supplied set of updated findings to apply new workflow and
+    severity values.
+  inputs:
+    type: object
+    required:
+    - severityLabel
+    - updatedFindings
+    properties:
+      severityLabel:
+        type: string
+        description: The severity label value used to filter the returned findings.
+      complianceStatus:
+        type: string
+        description: The compliance status value used to further filter the returned findings.
+        default: FAILED
+      maxResults:
+        type: integer
+        description: The maximum number of findings to return.
+        default: 100
+      updatedFindings:
+        type: array
+        description: The list of ASFF finding objects, with revised fields, to re-import.
+        items:
+          type: object
+  steps:
+  - stepId: getFindings
+    description: >-
+      Query Security Hub for findings matching the requested severity label and
+      compliance status so they can be reviewed before updating.
+    operationId: GetFindings
+    requestBody:
+      contentType: application/json
+      payload:
+        Filters:
+          SeverityLabel:
+          - Value: $inputs.severityLabel
+            Comparison: EQUALS
+          ComplianceStatus:
+          - Value: $inputs.complianceStatus
+            Comparison: EQUALS
+        MaxResults: $inputs.maxResults
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      findings: $response.body#/Findings
+      firstFindingId: $response.body#/Findings/0/Id
+      nextToken: $response.body#/NextToken
+  - stepId: updateFindings
+    description: >-
+      Re-import the supplied finding objects with their revised workflow status
+      and severity so Security Hub applies the updated attributes.
+    operationId: BatchImportFindings
+    requestBody:
+      contentType: application/json
+      payload:
+        Findings: $inputs.updatedFindings
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      successCount: $response.body#/SuccessCount
+      failedCount: $response.body#/FailedCount
+      failedFindings: $response.body#/FailedFindings
+  outputs:
+    reviewedFindings: $steps.getFindings.outputs.findings
+    successCount: $steps.updateFindings.outputs.successCount
+    failedCount: $steps.updateFindings.outputs.failedCount

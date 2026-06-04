@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Security Hub Onboard Product Integration
+  summary: Enable a partner product integration and verify its findings flow into Security Hub.
+  description: >-
+    Onboards a third-party security product into Security Hub by enabling its
+    finding import subscription, then queries the findings store filtered to
+    that product to confirm findings are arriving. The flow branches: when the
+    product's findings are present it ends successfully, and when none have
+    arrived yet it imports a seed finding so downstream automation has a record
+    to work with. Each step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: securityHubApi
+  url: ../openapi/amazon-security-hub-openapi.yml
+  type: openapi
+workflows:
+- workflowId: onboard-product-integration
+  summary: Enable a product subscription, then confirm its findings are importing.
+  description: >-
+    Enables the import of findings from a partner product, then verifies the
+    findings are arriving and seeds a finding when none are present yet.
+  inputs:
+    type: object
+    required:
+    - productArn
+    - productName
+    - seedFindings
+    properties:
+      productArn:
+        type: string
+        description: The ARN of the partner product to enable finding imports for.
+      productName:
+        type: string
+        description: The product name value used to filter the verification findings query.
+      seedFindings:
+        type: array
+        description: ASFF finding objects to import if the product has no findings yet.
+        items:
+          type: object
+  steps:
+  - stepId: enableProduct
+    description: >-
+      Enable the partner product integration so Security Hub begins accepting
+      imported findings from that product.
+    operationId: EnableImportFindingsForProduct
+    requestBody:
+      contentType: application/json
+      payload:
+        ProductArn: $inputs.productArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      productSubscriptionArn: $response.body#/ProductSubscriptionArn
+  - stepId: verifyFindings
+    description: >-
+      Query the findings store filtered to the onboarded product to confirm that
+      findings are arriving after the subscription was enabled.
+    operationId: GetFindings
+    requestBody:
+      contentType: application/json
+      payload:
+        Filters:
+          ProductName:
+          - Value: $inputs.productName
+            Comparison: EQUALS
+        MaxResults: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      findings: $response.body#/Findings
+    onSuccess:
+    - name: findingsPresent
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.Findings.length > 0
+        type: jsonpath
+    - name: noFindingsYet
+      type: goto
+      stepId: seedFindings
+      criteria:
+      - context: $response.body
+        condition: $.Findings.length == 0
+        type: jsonpath
+  - stepId: seedFindings
+    description: >-
+      Import a seed finding for the product so downstream automation has a record
+      to operate on while the live integration begins populating findings.
+    operationId: BatchImportFindings
+    requestBody:
+      contentType: application/json
+      payload:
+        Findings: $inputs.seedFindings
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      successCount: $response.body#/SuccessCount
+      failedCount: $response.body#/FailedCount
+  outputs:
+    productSubscriptionArn: $steps.enableProduct.outputs.productSubscriptionArn
+    findings: $steps.verifyFindings.outputs.findings
+    seededCount: $steps.seedFindings.outputs.successCount

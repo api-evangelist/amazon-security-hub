@@ -1,0 +1,95 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Security Hub Bootstrap Posture Baseline
+  summary: Enable Security Hub, confirm its standards, and capture an initial findings baseline.
+  description: >-
+    Establishes a complete starting posture for a new account. The workflow
+    enables Security Hub with default standards, enumerates the resulting
+    standards catalog to confirm the baseline controls, and then captures an
+    initial snapshot of active findings so subsequent runs can be compared
+    against this baseline. Each step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: securityHubApi
+  url: ../openapi/amazon-security-hub-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bootstrap-posture-baseline
+  summary: Enable the hub, list standards, and capture an initial active findings snapshot.
+  description: >-
+    Enables Security Hub with default standards, lists the available standards
+    to confirm the baseline, and captures the active findings present
+    immediately after enablement.
+  inputs:
+    type: object
+    properties:
+      enableDefaultStandards:
+        type: boolean
+        description: Whether to enable the standards Security Hub designates as automatically enabled.
+        default: true
+      controlFindingGenerator:
+        type: string
+        description: How control findings are generated.
+        enum:
+        - STANDARD_CONTROL
+        - SECURITY_CONTROL
+        default: SECURITY_CONTROL
+      maxResults:
+        type: integer
+        description: The maximum number of records to return for the standards and findings listings.
+        default: 100
+  steps:
+  - stepId: enableHub
+    description: >-
+      Enable Security Hub for the account, opting in to the default standards so
+      baseline control checks begin running immediately.
+    operationId: EnableSecurityHub
+    requestBody:
+      contentType: application/json
+      payload:
+        EnableDefaultStandards: $inputs.enableDefaultStandards
+        ControlFindingGenerator: $inputs.controlFindingGenerator
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      enableStatus: $statusCode
+  - stepId: confirmStandards
+    description: >-
+      List the available security standards to confirm which baseline controls
+      were enabled by default after the hub was turned on.
+    operationId: DescribeStandards
+    parameters:
+    - name: MaxResults
+      in: query
+      value: $inputs.maxResults
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      standards: $response.body#/Standards
+  - stepId: captureBaseline
+    description: >-
+      Capture a snapshot of active findings immediately after enablement so
+      later runs can be diffed against this initial posture baseline.
+    operationId: GetFindings
+    requestBody:
+      contentType: application/json
+      payload:
+        Filters:
+          RecordState:
+          - Value: ACTIVE
+            Comparison: EQUALS
+        SortCriteria:
+        - Field: CreatedAt
+          SortOrder: desc
+        MaxResults: $inputs.maxResults
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      baselineFindings: $response.body#/Findings
+      nextToken: $response.body#/NextToken
+  outputs:
+    enableStatus: $steps.enableHub.outputs.enableStatus
+    standards: $steps.confirmStandards.outputs.standards
+    baselineFindings: $steps.captureBaseline.outputs.baselineFindings
