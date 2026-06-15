@@ -1,0 +1,631 @@
+{
+  "info": {
+    "_postman_id": "7f63727e-cabd-4685-b4d0-b056228d7320",
+    "name": "Amazon Security Hub",
+    "description": "Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:05.000Z",
+    "updatedAt": "2026-06-05T15:05:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7f63727e-cabd-4685-b4d0-b056228d7320"
+  },
+  "item": [
+    {
+      "name": "accounts",
+      "item": [
+        {
+          "name": "Amazon Security Hub Enable Security Hub",
+          "id": "1f1ba5be-5b1d-454e-a4b2-a7fb68d8e7b5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Tags\": {\n    \"dolor_041\": \"<string>\"\n  },\n  \"EnableDefaultStandards\": \"<boolean>\",\n  \"ControlFindingGenerator\": \"STANDARD_CONTROL\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/accounts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "accounts"
+              ]
+            },
+            "description": "Enables Security Hub for your account in the current Region or the Region you specify in the request."
+          },
+          "response": [
+            {
+              "id": "c735ca34-d32a-44fe-ace0-ac02163be871",
+              "name": "Security Hub enabled successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Tags\": {\n    \"dolor_041\": \"<string>\"\n  },\n  \"EnableDefaultStandards\": \"<boolean>\",\n  \"ControlFindingGenerator\": \"STANDARD_CONTROL\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/accounts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "accounts"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:05:06.000Z",
+              "updatedAt": "2026-06-05T15:05:06.000Z",
+              "uid": "35240-c735ca34-d32a-44fe-ace0-ac02163be871"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:06.000Z",
+          "updatedAt": "2026-06-05T15:05:06.000Z",
+          "uid": "35240-1f1ba5be-5b1d-454e-a4b2-a7fb68d8e7b5"
+        }
+      ],
+      "id": "77cb43a3-5a9e-4bd4-b15b-8fb16b0a6a42",
+      "createdAt": "2026-06-05T15:05:06.000Z",
+      "updatedAt": "2026-06-05T15:05:06.000Z",
+      "uid": "35240-77cb43a3-5a9e-4bd4-b15b-8fb16b0a6a42"
+    },
+    {
+      "name": "findings",
+      "item": [
+        {
+          "name": "import",
+          "item": [
+            {
+              "name": "Amazon Security Hub Batch Import Findings",
+              "id": "32ea1795-76ee-44ca-9ff0-6b3e64f5c3bb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Findings\": [\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"HIGH\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"WARNING\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"RESOLVED\"\n      },\n      \"RecordState\": \"ACTIVE\"\n    },\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"INFORMATIONAL\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"WARNING\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"NEW\"\n      },\n      \"RecordState\": \"ACTIVE\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/findings/import",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "findings",
+                    "import"
+                  ]
+                },
+                "description": "Imports security findings generated from an integrated third-party product into Security Hub."
+              },
+              "response": [
+                {
+                  "id": "2fd9be48-b7c3-4e32-af4b-3023de9944a1",
+                  "name": "Batch import results.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"Findings\": [\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"HIGH\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"WARNING\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"RESOLVED\"\n      },\n      \"RecordState\": \"ACTIVE\"\n    },\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"INFORMATIONAL\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"WARNING\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"NEW\"\n      },\n      \"RecordState\": \"ACTIVE\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/findings/import",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "findings",
+                        "import"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"FailedCount\": \"<integer>\",\n  \"SuccessCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:05:06.000Z",
+                  "updatedAt": "2026-06-05T15:05:06.000Z",
+                  "uid": "35240-2fd9be48-b7c3-4e32-af4b-3023de9944a1"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:06.000Z",
+              "updatedAt": "2026-06-05T15:05:06.000Z",
+              "uid": "35240-32ea1795-76ee-44ca-9ff0-6b3e64f5c3bb"
+            }
+          ],
+          "id": "776d571a-1048-4791-9006-129720234bd2",
+          "createdAt": "2026-06-05T15:05:06.000Z",
+          "updatedAt": "2026-06-05T15:05:06.000Z",
+          "uid": "35240-776d571a-1048-4791-9006-129720234bd2"
+        },
+        {
+          "name": "Amazon Security Hub Get Findings",
+          "id": "3baeacb1-578c-477c-b394-c4109365db6c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Filters\": {},\n  \"SortCriteria\": [\n    {\n      \"Field\": \"<string>\",\n      \"SortOrder\": \"asc\"\n    },\n    {\n      \"Field\": \"<string>\",\n      \"SortOrder\": \"desc\"\n    }\n  ],\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/findings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "findings"
+              ]
+            },
+            "description": "Returns a list of findings that match the specified criteria, with filtering, sorting, and pagination support."
+          },
+          "response": [
+            {
+              "id": "ded39d56-1935-43ad-86c1-22d229ddf0ed",
+              "name": "List of findings.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Filters\": {},\n  \"SortCriteria\": [\n    {\n      \"Field\": \"<string>\",\n      \"SortOrder\": \"asc\"\n    },\n    {\n      \"Field\": \"<string>\",\n      \"SortOrder\": \"desc\"\n    }\n  ],\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/findings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "findings"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Findings\": [\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"HIGH\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"PASSED\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"NEW\"\n      },\n      \"RecordState\": \"ACTIVE\"\n    },\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"CRITICAL\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": {}\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"FAILED\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"NEW\"\n      },\n      \"RecordState\": \"ACTIVE\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:06.000Z",
+              "updatedAt": "2026-06-05T15:05:06.000Z",
+              "uid": "35240-ded39d56-1935-43ad-86c1-22d229ddf0ed"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:06.000Z",
+          "updatedAt": "2026-06-05T15:05:06.000Z",
+          "uid": "35240-3baeacb1-578c-477c-b394-c4109365db6c"
+        }
+      ],
+      "id": "b1db304d-853c-4eab-aa82-8dcac2a761eb",
+      "createdAt": "2026-06-05T15:05:06.000Z",
+      "updatedAt": "2026-06-05T15:05:06.000Z",
+      "uid": "35240-b1db304d-853c-4eab-aa82-8dcac2a761eb"
+    },
+    {
+      "name": "insights",
+      "item": [
+        {
+          "name": "Amazon Security Hub Get Insights",
+          "id": "e65c531a-9994-45ff-a4a8-da38ed57f478",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"InsightArns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/insights",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "insights"
+              ]
+            },
+            "description": "Lists and describes insights for the specified insight ARNs or returns all insights."
+          },
+          "response": [
+            {
+              "id": "9db9c081-f3a5-4e66-a3df-ad76c27847df",
+              "name": "List of insights.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"InsightArns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/insights",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "insights"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Insights\": [\n    {\n      \"InsightArn\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Filters\": {},\n      \"GroupByAttribute\": \"<string>\"\n    },\n    {\n      \"InsightArn\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Filters\": {},\n      \"GroupByAttribute\": \"<string>\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:06.000Z",
+              "updatedAt": "2026-06-05T15:05:06.000Z",
+              "uid": "35240-9db9c081-f3a5-4e66-a3df-ad76c27847df"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:06.000Z",
+          "updatedAt": "2026-06-05T15:05:06.000Z",
+          "uid": "35240-e65c531a-9994-45ff-a4a8-da38ed57f478"
+        }
+      ],
+      "id": "f3048621-49c8-4dc4-b5ef-4500ece31a14",
+      "createdAt": "2026-06-05T15:05:06.000Z",
+      "updatedAt": "2026-06-05T15:05:06.000Z",
+      "uid": "35240-f3048621-49c8-4dc4-b5ef-4500ece31a14"
+    },
+    {
+      "name": "productSubscriptions",
+      "item": [
+        {
+          "name": "Amazon Security Hub Enable Import Findings for Product",
+          "id": "bf639243-838a-4017-97d6-c9505bfacdc8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ProductArn\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/productSubscriptions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "productSubscriptions"
+              ]
+            },
+            "description": "Enables the integration of a partner product with Security Hub, allowing import of findings from that product."
+          },
+          "response": [
+            {
+              "id": "229e320c-e20d-4a14-a8dd-f0ec7e8263d0",
+              "name": "Product subscription enabled.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ProductArn\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/productSubscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "productSubscriptions"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"ProductSubscriptionArn\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:06.000Z",
+              "updatedAt": "2026-06-05T15:05:06.000Z",
+              "uid": "35240-229e320c-e20d-4a14-a8dd-f0ec7e8263d0"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:06.000Z",
+          "updatedAt": "2026-06-05T15:05:06.000Z",
+          "uid": "35240-bf639243-838a-4017-97d6-c9505bfacdc8"
+        }
+      ],
+      "id": "84345d58-8606-4c6c-9173-afd2eb82d168",
+      "createdAt": "2026-06-05T15:05:06.000Z",
+      "updatedAt": "2026-06-05T15:05:06.000Z",
+      "uid": "35240-84345d58-8606-4c6c-9173-afd2eb82d168"
+    },
+    {
+      "name": "standards",
+      "item": [
+        {
+          "name": "Amazon Security Hub Describe Standards",
+          "id": "d92a7443-4418-4dbb-8ba2-737636c8e5c9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/standards?NextToken=<string>&MaxResults=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "standards"
+              ],
+              "query": [
+                {
+                  "key": "NextToken",
+                  "value": "<string>"
+                },
+                {
+                  "key": "MaxResults",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Returns a list of the available security standards, including the name, description, and subscription status."
+          },
+          "response": [
+            {
+              "id": "d415475d-b75e-4822-835f-da8a37666a59",
+              "name": "List of standards.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/standards?NextToken=<string>&MaxResults=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "standards"
+                  ],
+                  "query": [
+                    {
+                      "key": "NextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "MaxResults",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Standards\": [\n    {\n      \"StandardsArn\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"EnabledByDefault\": \"<boolean>\"\n    },\n    {\n      \"StandardsArn\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"EnabledByDefault\": \"<boolean>\"\n    }\n  ],\n  \"NextToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:05:06.000Z",
+              "updatedAt": "2026-06-05T15:05:06.000Z",
+              "uid": "35240-d415475d-b75e-4822-835f-da8a37666a59"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:06.000Z",
+          "updatedAt": "2026-06-05T15:05:06.000Z",
+          "uid": "35240-d92a7443-4418-4dbb-8ba2-737636c8e5c9"
+        }
+      ],
+      "id": "af029ba0-c57d-4d42-8d21-f4a107f8f352",
+      "createdAt": "2026-06-05T15:05:06.000Z",
+      "updatedAt": "2026-06-05T15:05:06.000Z",
+      "uid": "35240-af029ba0-c57d-4d42-8d21-f4a107f8f352"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://securityhub.amazonaws.com"
+    }
+  ]
+}
