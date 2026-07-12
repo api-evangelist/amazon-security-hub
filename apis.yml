@@ -34,6 +34,12 @@ apis:
       - type: JSONSchema
         url: json-schema/amazon-security-hub-finding-schema.json
 common:
+  - type: TrustCenter
+    url: security/amazon-security-hub-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-security-hub-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-security-hub-domain-security.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-security-hub/overview
   - type: Arazzo
