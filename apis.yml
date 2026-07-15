@@ -34,6 +34,8 @@ apis:
       - type: JSONSchema
         url: json-schema/amazon-security-hub-finding-schema.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-security-hub-agentic-access.yml
   - type: TrustCenter
     url: security/amazon-security-hub-trust-center.yml
   - type: VulnerabilityDisclosure
