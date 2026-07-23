@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: Amazon Security Hub Administration API
+  description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.
+  version: '2018-10-26'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+    url: https://aws.amazon.com/security-hub/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://securityhub.amazonaws.com
+  description: Amazon Security Hub API endpoint
+tags:
+- name: Administration
+  description: Operations for enabling and configuring Security Hub.
+paths:
+  /accounts:
+    post:
+      operationId: EnableSecurityHub
+      summary: Amazon Security Hub Enable Security Hub
+      description: Enables Security Hub for your account in the current Region or the Region you specify in the request.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Tags:
+                  type: object
+                  additionalProperties:
+                    type: string
+                EnableDefaultStandards:
+                  type: boolean
+                  description: Whether to enable the security standards that Security Hub has designated as automatically enabled.
+                ControlFindingGenerator:
+                  type: string
+                  enum:
+                  - STANDARD_CONTROL
+                  - SECURITY_CONTROL
+      responses:
+        '200':
+          description: Security Hub enabled successfully.
+      tags:
+      - Administration
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK

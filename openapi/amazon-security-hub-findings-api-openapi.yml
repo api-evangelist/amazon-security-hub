@@ -1,8 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Amazon Security Hub
-  description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS 
-    accounts.
+  title: Amazon Security Hub Administration Findings API
+  description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.
   version: '2018-10-26'
   contact:
     name: Kin Lane
@@ -14,40 +13,10 @@ info:
 servers:
 - url: https://securityhub.amazonaws.com
   description: Amazon Security Hub API endpoint
+tags:
+- name: Findings
+  description: Operations for managing security findings.
 paths:
-  /accounts:
-    post:
-      operationId: EnableSecurityHub
-      summary: Amazon Security Hub Enable Security Hub
-      description: Enables Security Hub for your account in the current Region or the Region you specify in the request.
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                Tags:
-                  type: object
-                  additionalProperties:
-                    type: string
-                EnableDefaultStandards:
-                  type: boolean
-                  description: Whether to enable the security standards that Security Hub has designated as automatically enabled.
-                ControlFindingGenerator:
-                  type: string
-                  enum:
-                  - STANDARD_CONTROL
-                  - SECURITY_CONTROL
-      responses:
-        '200':
-          description: Security Hub enabled successfully.
-      tags:
-      - Administration
-
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
   /findings:
     post:
       operationId: GetFindings
@@ -121,7 +90,6 @@ paths:
                     Region: us-east-1
       tags:
       - Findings
-
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
@@ -169,153 +137,6 @@ paths:
                     Region: us-east-1
       tags:
       - Findings
-
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /insights:
-    post:
-      operationId: GetInsights
-      summary: Amazon Security Hub Get Insights
-      description: Lists and describes insights for the specified insight ARNs or returns all insights.
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                InsightArns:
-                  type: array
-                  items:
-                    type: string
-                NextToken:
-                  type: string
-                MaxResults:
-                  type: integer
-      responses:
-        '200':
-          description: List of insights.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  Insights:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        InsightArn:
-                          type: string
-                        Name:
-                          type: string
-                        Filters:
-                          type: object
-                        GroupByAttribute:
-                          type: string
-                  NextToken:
-                    type: string
-              examples:
-                GetInsights200Example:
-                  summary: Default GetInsights 200 response
-                  x-microcks-default: true
-                  value:
-                    AccountId: '123456789012'
-                    Region: us-east-1
-      tags:
-      - Insights
-
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /productSubscriptions:
-    post:
-      operationId: EnableImportFindingsForProduct
-      summary: Amazon Security Hub Enable Import Findings for Product
-      description: Enables the integration of a partner product with Security Hub, allowing import of findings from that product.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                ProductArn:
-                  type: string
-                  description: The ARN of the product to enable the integration for.
-              required:
-              - ProductArn
-      responses:
-        '200':
-          description: Product subscription enabled.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  ProductSubscriptionArn:
-                    type: string
-              examples:
-                EnableImportFindingsForProduct200Example:
-                  summary: Default EnableImportFindingsForProduct 200 response
-                  x-microcks-default: true
-                  value:
-                    AccountId: '123456789012'
-                    Region: us-east-1
-      tags:
-      - Integrations
-
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /standards:
-    get:
-      operationId: DescribeStandards
-      summary: Amazon Security Hub Describe Standards
-      description: Returns a list of the available security standards, including the name, description, and subscription status.
-      parameters:
-      - name: NextToken
-        in: query
-        schema:
-          type: string
-      - name: MaxResults
-        in: query
-        schema:
-          type: integer
-      responses:
-        '200':
-          description: List of standards.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  Standards:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        StandardsArn:
-                          type: string
-                        Name:
-                          type: string
-                        Description:
-                          type: string
-                        EnabledByDefault:
-                          type: boolean
-                  NextToken:
-                    type: string
-              examples:
-                DescribeStandards200Example:
-                  summary: Default DescribeStandards 200 response
-                  x-microcks-default: true
-                  value:
-                    AccountId: '123456789012'
-                    Region: us-east-1
-      tags:
-      - Standards
-
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
@@ -432,15 +253,3 @@ components:
       - Title
       - Description
       - Resources
-
-tags:
-- name: Administration
-  description: Operations for enabling and configuring Security Hub.
-- name: Findings
-  description: Operations for managing security findings.
-- name: Insights
-  description: Operations for managing security insights.
-- name: Integrations
-  description: Operations for managing product integrations.
-- name: Standards
-  description: Operations for managing security standards.

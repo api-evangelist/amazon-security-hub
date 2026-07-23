@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Amazon Security Hub Administration Integrations API
+  description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.
+  version: '2018-10-26'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+    url: https://aws.amazon.com/security-hub/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://securityhub.amazonaws.com
+  description: Amazon Security Hub API endpoint
+tags:
+- name: Integrations
+  description: Operations for managing product integrations.
+paths:
+  /productSubscriptions:
+    post:
+      operationId: EnableImportFindingsForProduct
+      summary: Amazon Security Hub Enable Import Findings for Product
+      description: Enables the integration of a partner product with Security Hub, allowing import of findings from that product.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ProductArn:
+                  type: string
+                  description: The ARN of the product to enable the integration for.
+              required:
+              - ProductArn
+      responses:
+        '200':
+          description: Product subscription enabled.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ProductSubscriptionArn:
+                    type: string
+              examples:
+                EnableImportFindingsForProduct200Example:
+                  summary: Default EnableImportFindingsForProduct 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
+      tags:
+      - Integrations
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK

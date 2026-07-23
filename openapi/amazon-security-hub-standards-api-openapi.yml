@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: Amazon Security Hub Administration Standards API
+  description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.
+  version: '2018-10-26'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+    url: https://aws.amazon.com/security-hub/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://securityhub.amazonaws.com
+  description: Amazon Security Hub API endpoint
+tags:
+- name: Standards
+  description: Operations for managing security standards.
+paths:
+  /standards:
+    get:
+      operationId: DescribeStandards
+      summary: Amazon Security Hub Describe Standards
+      description: Returns a list of the available security standards, including the name, description, and subscription status.
+      parameters:
+      - name: NextToken
+        in: query
+        schema:
+          type: string
+      - name: MaxResults
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of standards.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Standards:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        StandardsArn:
+                          type: string
+                        Name:
+                          type: string
+                        Description:
+                          type: string
+                        EnabledByDefault:
+                          type: boolean
+                  NextToken:
+                    type: string
+              examples:
+                DescribeStandards200Example:
+                  summary: Default DescribeStandards 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
+      tags:
+      - Standards
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK

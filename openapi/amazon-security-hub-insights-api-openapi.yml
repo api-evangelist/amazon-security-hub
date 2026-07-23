@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  title: Amazon Security Hub Administration Insights API
+  description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.
+  version: '2018-10-26'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+    url: https://aws.amazon.com/security-hub/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://securityhub.amazonaws.com
+  description: Amazon Security Hub API endpoint
+tags:
+- name: Insights
+  description: Operations for managing security insights.
+paths:
+  /insights:
+    post:
+      operationId: GetInsights
+      summary: Amazon Security Hub Get Insights
+      description: Lists and describes insights for the specified insight ARNs or returns all insights.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                InsightArns:
+                  type: array
+                  items:
+                    type: string
+                NextToken:
+                  type: string
+                MaxResults:
+                  type: integer
+      responses:
+        '200':
+          description: List of insights.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Insights:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        InsightArn:
+                          type: string
+                        Name:
+                          type: string
+                        Filters:
+                          type: object
+                        GroupByAttribute:
+                          type: string
+                  NextToken:
+                    type: string
+              examples:
+                GetInsights200Example:
+                  summary: Default GetInsights 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
+      tags:
+      - Insights
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
