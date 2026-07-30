@@ -1,3 +1,16 @@
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-security-hub.png
 name: Amazon Security Hub
 description: >-
   AWS Security Hub is a cloud security posture management service that provides a comprehensive view of your security
@@ -14,25 +27,76 @@ tags:
   - Monitoring
   - Security
 apis:
-  - name: AWS Security Hub API
-    description: >-
-      The AWS Security Hub API provides programmatic access to manage centralized security findings across your AWS
-      environment. It enables developers to import and manage security findings, configure security standards and
-      controls, manage integrations with other AWS services and third-party tools, and automate security workflows.
-    humanURL: https://docs.aws.amazon.com/securityhub/latest/APIReference/
-    baseURL: https://securityhub.{region}.amazonaws.com
-    tags:
-      - AWS
-      - Compliance
-      - Monitoring
-      - Security
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/securityhub/latest/APIReference/
-      - type: OpenAPI
-        url: openapi/amazon-security-hub-openapi.yml
-      - type: JSONSchema
-        url: json-schema/amazon-security-hub-finding-schema.json
+- aid: amazon-security-hub:amazon-security-hub-administration-api
+  name: Amazon Security Hub Administration API
+  description: Operations for enabling and configuring Security Hub.
+  humanURL: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  baseURL: https://securityhub.{region}.amazonaws.com
+  tags:
+  - Administration
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-security-hub-administration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  - type: JSONSchema
+    url: json-schema/amazon-security-hub-finding-schema.json
+- aid: amazon-security-hub:amazon-security-hub-findings-api
+  name: Amazon Security Hub Findings API
+  description: Operations for managing security findings.
+  humanURL: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  baseURL: https://securityhub.{region}.amazonaws.com
+  tags:
+  - Findings
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-security-hub-findings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  - type: JSONSchema
+    url: json-schema/amazon-security-hub-finding-schema.json
+- aid: amazon-security-hub:amazon-security-hub-insights-api
+  name: Amazon Security Hub Insights API
+  description: Operations for managing security insights.
+  humanURL: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  baseURL: https://securityhub.{region}.amazonaws.com
+  tags:
+  - Insights
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-security-hub-insights-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  - type: JSONSchema
+    url: json-schema/amazon-security-hub-finding-schema.json
+- aid: amazon-security-hub:amazon-security-hub-integrations-api
+  name: Amazon Security Hub Integrations API
+  description: Operations for managing product integrations.
+  humanURL: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  baseURL: https://securityhub.{region}.amazonaws.com
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-security-hub-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  - type: JSONSchema
+    url: json-schema/amazon-security-hub-finding-schema.json
+- aid: amazon-security-hub:amazon-security-hub-standards-api
+  name: Amazon Security Hub Standards API
+  description: Operations for managing security standards.
+  humanURL: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  baseURL: https://securityhub.{region}.amazonaws.com
+  tags:
+  - Standards
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-security-hub-standards-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/securityhub/latest/APIReference/
+  - type: JSONSchema
+    url: json-schema/amazon-security-hub-finding-schema.json
 common:
   - type: AgenticAccess
     url: agentic-access/amazon-security-hub-agentic-access.yml
