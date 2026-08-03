@@ -1,0 +1,446 @@
+openapi: 3.0.0
+info:
+  title: Amazon Security Hub
+  description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS 
+    accounts.
+  version: '2018-10-26'
+  contact:
+    name: Kin Lane
+    email: kin@apievangelist.com
+    url: https://aws.amazon.com/security-hub/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://securityhub.amazonaws.com
+  description: Amazon Security Hub API endpoint
+paths:
+  /accounts:
+    post:
+      operationId: EnableSecurityHub
+      summary: Amazon Security Hub Enable Security Hub
+      description: Enables Security Hub for your account in the current Region or the Region you specify in the request.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Tags:
+                  type: object
+                  additionalProperties:
+                    type: string
+                EnableDefaultStandards:
+                  type: boolean
+                  description: Whether to enable the security standards that Security Hub has designated as automatically enabled.
+                ControlFindingGenerator:
+                  type: string
+                  enum:
+                  - STANDARD_CONTROL
+                  - SECURITY_CONTROL
+      responses:
+        '200':
+          description: Security Hub enabled successfully.
+      tags:
+      - Administration
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /findings:
+    post:
+      operationId: GetFindings
+      summary: Amazon Security Hub Get Findings
+      description: Returns a list of findings that match the specified criteria, with filtering, sorting, and pagination support.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Filters:
+                  type: object
+                  description: The finding attributes used to define a condition to filter the returned findings.
+                  properties:
+                    SeverityLabel:
+                      type: array
+                      items:
+                        type: object
+                    ComplianceStatus:
+                      type: array
+                      items:
+                        type: object
+                    ProductName:
+                      type: array
+                      items:
+                        type: object
+                    ResourceType:
+                      type: array
+                      items:
+                        type: object
+                SortCriteria:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      Field:
+                        type: string
+                      SortOrder:
+                        type: string
+                        enum:
+                        - asc
+                        - desc
+                NextToken:
+                  type: string
+                MaxResults:
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+      responses:
+        '200':
+          description: List of findings.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Findings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Finding'
+                  NextToken:
+                    type: string
+              examples:
+                GetFindings200Example:
+                  summary: Default GetFindings 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
+      tags:
+      - Findings
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /findings/import:
+    post:
+      operationId: BatchImportFindings
+      summary: Amazon Security Hub Batch Import Findings
+      description: Imports security findings generated from an integrated third-party product into Security Hub.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Findings:
+                  type: array
+                  description: A list of findings to import.
+                  items:
+                    $ref: '#/components/schemas/Finding'
+              required:
+              - Findings
+      responses:
+        '200':
+          description: Batch import results.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  FailedCount:
+                    type: integer
+                  SuccessCount:
+                    type: integer
+                  FailedFindings:
+                    type: array
+                    items:
+                      type: object
+              examples:
+                BatchImportFindings200Example:
+                  summary: Default BatchImportFindings 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
+      tags:
+      - Findings
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /insights:
+    post:
+      operationId: GetInsights
+      summary: Amazon Security Hub Get Insights
+      description: Lists and describes insights for the specified insight ARNs or returns all insights.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                InsightArns:
+                  type: array
+                  items:
+                    type: string
+                NextToken:
+                  type: string
+                MaxResults:
+                  type: integer
+      responses:
+        '200':
+          description: List of insights.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Insights:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        InsightArn:
+                          type: string
+                        Name:
+                          type: string
+                        Filters:
+                          type: object
+                        GroupByAttribute:
+                          type: string
+                  NextToken:
+                    type: string
+              examples:
+                GetInsights200Example:
+                  summary: Default GetInsights 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
+      tags:
+      - Insights
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /productSubscriptions:
+    post:
+      operationId: EnableImportFindingsForProduct
+      summary: Amazon Security Hub Enable Import Findings for Product
+      description: Enables the integration of a partner product with Security Hub, allowing import of findings from that product.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ProductArn:
+                  type: string
+                  description: The ARN of the product to enable the integration for.
+              required:
+              - ProductArn
+      responses:
+        '200':
+          description: Product subscription enabled.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ProductSubscriptionArn:
+                    type: string
+              examples:
+                EnableImportFindingsForProduct200Example:
+                  summary: Default EnableImportFindingsForProduct 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
+      tags:
+      - Integrations
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /standards:
+    get:
+      operationId: DescribeStandards
+      summary: Amazon Security Hub Describe Standards
+      description: Returns a list of the available security standards, including the name, description, and subscription status.
+      parameters:
+      - name: NextToken
+        in: query
+        schema:
+          type: string
+      - name: MaxResults
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of standards.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Standards:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        StandardsArn:
+                          type: string
+                        Name:
+                          type: string
+                        Description:
+                          type: string
+                        EnabledByDefault:
+                          type: boolean
+                  NextToken:
+                    type: string
+              examples:
+                DescribeStandards200Example:
+                  summary: Default DescribeStandards 200 response
+                  x-microcks-default: true
+                  value:
+                    AccountId: '123456789012'
+                    Region: us-east-1
+      tags:
+      - Standards
+
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Finding:
+      type: object
+      description: An AWS Security Finding Format (ASFF) finding object that provides a normalized format for security findings.
+      properties:
+        SchemaVersion:
+          type: string
+          description: The schema version that a finding is formatted for.
+        Id:
+          type: string
+          description: The identifier for the finding.
+        ProductArn:
+          type: string
+          description: The ARN generated by Security Hub for the product that generated the finding.
+        GeneratorId:
+          type: string
+          description: The identifier for the solution-specific component that generated the finding.
+        AwsAccountId:
+          type: string
+          description: The AWS account ID where the finding was generated.
+        Types:
+          type: array
+          description: One or more finding types in the format of namespace/category/classifier.
+          items:
+            type: string
+        CreatedAt:
+          type: string
+          format: date-time
+          description: Indicates when the finding was created.
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: Indicates when the finding was most recently updated.
+        Severity:
+          type: object
+          description: The severity of the finding.
+          properties:
+            Label:
+              type: string
+              enum:
+              - INFORMATIONAL
+              - LOW
+              - MEDIUM
+              - HIGH
+              - CRITICAL
+            Normalized:
+              type: integer
+              minimum: 0
+              maximum: 100
+        Title:
+          type: string
+          description: A finding title.
+        Description:
+          type: string
+          description: A finding description.
+        Resources:
+          type: array
+          description: A set of resource data types describing the resources the finding refers to.
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+              Id:
+                type: string
+              Partition:
+                type: string
+              Region:
+                type: string
+              Details:
+                type: object
+        Compliance:
+          type: object
+          properties:
+            Status:
+              type: string
+              enum:
+              - PASSED
+              - WARNING
+              - FAILED
+              - NOT_AVAILABLE
+            RelatedRequirements:
+              type: array
+              items:
+                type: string
+        Workflow:
+          type: object
+          properties:
+            Status:
+              type: string
+              enum:
+              - NEW
+              - NOTIFIED
+              - RESOLVED
+              - SUPPRESSED
+        RecordState:
+          type: string
+          enum:
+          - ACTIVE
+          - ARCHIVED
+      required:
+      - SchemaVersion
+      - Id
+      - ProductArn
+      - GeneratorId
+      - AwsAccountId
+      - CreatedAt
+      - UpdatedAt
+      - Severity
+      - Title
+      - Description
+      - Resources
+
+tags:
+- name: Administration
+  description: Operations for enabling and configuring Security Hub.
+- name: Findings
+  description: Operations for managing security findings.
+- name: Insights
+  description: Operations for managing security insights.
+- name: Integrations
+  description: Operations for managing product integrations.
+- name: Standards
+  description: Operations for managing security standards.
