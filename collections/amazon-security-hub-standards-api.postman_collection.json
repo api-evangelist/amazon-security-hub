@@ -1,0 +1,122 @@
+{
+  "item": [
+    {
+      "id": "e90c51a7-fa0e-4831-bdbb-bf2c6e837f1d",
+      "name": "Standards",
+      "description": {
+        "content": "Operations for managing security standards.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3a2814e4-b945-4ea0-9ae9-debf32a7f88e",
+          "name": "Amazon Security Hub Describe Standards",
+          "request": {
+            "name": "Amazon Security Hub Describe Standards",
+            "description": {
+              "content": "Returns a list of the available security standards, including the name, description, and subscription status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "standards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "NextToken",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "MaxResults",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "20bb5b34-cc19-42a1-9a99-4ebd483f4090",
+              "name": "List of standards.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "standards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "NextToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "MaxResults",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AccountId\": \"123456789012\",\n  \"Region\": \"us-east-1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://securityhub.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "72e2dd14-4e96-4600-9a6f-dddfa4aa5e96",
+    "name": "Amazon Security Hub Administration Standards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

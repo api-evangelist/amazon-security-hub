@@ -1,0 +1,113 @@
+{
+  "item": [
+    {
+      "id": "67970fbe-4604-44ef-847b-94c5033133ce",
+      "name": "Administration",
+      "description": {
+        "content": "Operations for enabling and configuring Security Hub.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "072915bc-a4be-44bf-9ca3-fc21d55d7070",
+          "name": "Amazon Security Hub Enable Security Hub",
+          "request": {
+            "name": "Amazon Security Hub Enable Security Hub",
+            "description": {
+              "content": "Enables Security Hub for your account in the current Region or the Region you specify in the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"EnableDefaultStandards\": \"<boolean>\",\n  \"ControlFindingGenerator\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf334307-b1bc-42fe-a9fb-9919cd0e358f",
+              "name": "Security Hub enabled successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Tags\": {\n    \"key_0\": \"<string>\"\n  },\n  \"EnableDefaultStandards\": \"<boolean>\",\n  \"ControlFindingGenerator\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://securityhub.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c366f7c5-8a09-4881-ac7d-0c34e2e5a849",
+    "name": "Amazon Security Hub Administration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

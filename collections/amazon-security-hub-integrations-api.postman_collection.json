@@ -1,0 +1,123 @@
+{
+  "item": [
+    {
+      "id": "7452e17d-ab04-462b-a092-013bce7b6837",
+      "name": "Integrations",
+      "description": {
+        "content": "Operations for managing product integrations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0831376b-e54f-4997-8770-f0e46f14f552",
+          "name": "Amazon Security Hub Enable Import Findings for Product",
+          "request": {
+            "name": "Amazon Security Hub Enable Import Findings for Product",
+            "description": {
+              "content": "Enables the integration of a partner product with Security Hub, allowing import of findings from that product.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "productSubscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ProductArn\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2eed545a-d675-4fd3-bf2a-8552aa73feba",
+              "name": "Product subscription enabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "productSubscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ProductArn\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AccountId\": \"123456789012\",\n  \"Region\": \"us-east-1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://securityhub.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7f2d0861-e052-41f7-b72d-123844bb7119",
+    "name": "Amazon Security Hub Administration Integrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Security Hub Administration API",
+    "version": "2018-10-26"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Administration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Security Hub Enable Security Hub",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://securityhub.amazonaws.com/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables Security Hub for your account in the current Region or the Region you specify in the request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Security Hub Administration Findings API",
+    "version": "2018-10-26"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Findings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Security Hub Get Findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://securityhub.amazonaws.com/findings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of findings that match the specified criteria, with filtering, sorting, and pagination support."
+        },
+        {
+          "info": {
+            "name": "Amazon Security Hub Batch Import Findings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://securityhub.amazonaws.com/findings/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Imports security findings generated from an integrated third-party product into Security Hub."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

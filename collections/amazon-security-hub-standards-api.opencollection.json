@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Security Hub Administration Standards API",
+    "version": "2018-10-26"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Standards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Security Hub Describe Standards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://securityhub.amazonaws.com/standards",
+            "params": [
+              {
+                "name": "NextToken",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "MaxResults",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of the available security standards, including the name, description, and subscription status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

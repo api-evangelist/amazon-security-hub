@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Security Hub Administration Insights API",
+    "version": "2018-10-26"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Insights",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Security Hub Get Insights",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://securityhub.amazonaws.com/insights",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Lists and describes insights for the specified insight ARNs or returns all insights."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

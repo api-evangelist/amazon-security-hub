@@ -1,0 +1,216 @@
+{
+  "item": [
+    {
+      "id": "fe5ae8d6-fc78-490b-b7bb-7828bd7dcde3",
+      "name": "Findings",
+      "description": {
+        "content": "Operations for managing security findings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55ae8c14-a3cb-4bc4-b049-6ead70fef196",
+          "name": "Amazon Security Hub Get Findings",
+          "request": {
+            "name": "Amazon Security Hub Get Findings",
+            "description": {
+              "content": "Returns a list of findings that match the specified criteria, with filtering, sorting, and pagination support.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "findings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Filters\": {\n    \"SeverityLabel\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"ComplianceStatus\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"ProductName\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"ResourceType\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  },\n  \"SortCriteria\": [\n    {\n      \"Field\": \"<string>\",\n      \"SortOrder\": \"<string>\"\n    },\n    {\n      \"Field\": \"<string>\",\n      \"SortOrder\": \"<string>\"\n    }\n  ],\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a4718644-6338-4e79-a290-0a07c132721f",
+              "name": "List of findings.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "findings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Filters\": {\n    \"SeverityLabel\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"ComplianceStatus\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"ProductName\": [\n      \"<object>\",\n      \"<object>\"\n    ],\n    \"ResourceType\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  },\n  \"SortCriteria\": [\n    {\n      \"Field\": \"<string>\",\n      \"SortOrder\": \"<string>\"\n    },\n    {\n      \"Field\": \"<string>\",\n      \"SortOrder\": \"<string>\"\n    }\n  ],\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AccountId\": \"123456789012\",\n  \"Region\": \"us-east-1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb317b67-dfff-4e3d-8ba0-ec3efc8d3ccb",
+          "name": "Amazon Security Hub Batch Import Findings",
+          "request": {
+            "name": "Amazon Security Hub Batch Import Findings",
+            "description": {
+              "content": "Imports security findings generated from an integrated third-party product into Security Hub.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "findings",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Findings\": [\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"<string>\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": \"<object>\"\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": \"<object>\"\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"<string>\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"<string>\"\n      },\n      \"RecordState\": \"<string>\"\n    },\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"<string>\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": \"<object>\"\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": \"<object>\"\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"<string>\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"<string>\"\n      },\n      \"RecordState\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b71477d0-fc8f-4e87-a21a-f09c938a8c74",
+              "name": "Batch import results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "findings",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Findings\": [\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"<string>\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": \"<object>\"\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": \"<object>\"\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"<string>\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"<string>\"\n      },\n      \"RecordState\": \"<string>\"\n    },\n    {\n      \"SchemaVersion\": \"<string>\",\n      \"Id\": \"<string>\",\n      \"ProductArn\": \"<string>\",\n      \"GeneratorId\": \"<string>\",\n      \"AwsAccountId\": \"<string>\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"UpdatedAt\": \"<dateTime>\",\n      \"Severity\": {\n        \"Label\": \"<string>\",\n        \"Normalized\": \"<integer>\"\n      },\n      \"Title\": \"<string>\",\n      \"Description\": \"<string>\",\n      \"Resources\": [\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": \"<object>\"\n        },\n        {\n          \"Type\": \"<string>\",\n          \"Id\": \"<string>\",\n          \"Partition\": \"<string>\",\n          \"Region\": \"<string>\",\n          \"Details\": \"<object>\"\n        }\n      ],\n      \"Types\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Compliance\": {\n        \"Status\": \"<string>\",\n        \"RelatedRequirements\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"Workflow\": {\n        \"Status\": \"<string>\"\n      },\n      \"RecordState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AccountId\": \"123456789012\",\n  \"Region\": \"us-east-1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://securityhub.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3f63ae8c-101e-4d03-a0d0-1c650fbdf413",
+    "name": "Amazon Security Hub Administration Findings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.\n\nContact Support:\n Name: Kin Lane\n Email: kin@apievangelist.com",
+      "type": "text/plain"
+    }
+  }
+}
