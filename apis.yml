@@ -76,6 +76,8 @@ apis:
   humanURL: https://docs.aws.amazon.com/securityhub/latest/APIReference/
   baseURL: https://securityhub.{region}.amazonaws.com
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
