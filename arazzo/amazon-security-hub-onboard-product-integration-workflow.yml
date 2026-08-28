@@ -12,8 +12,11 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: securityHubApi
-  url: ../openapi/amazon-security-hub-openapi.yml
+- name: findingsApi
+  url: ../openapi/amazon-security-hub-findings-api-openapi.yml
+  type: openapi
+- name: integrationsApi
+  url: ../openapi/amazon-security-hub-integrations-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: onboard-product-integration

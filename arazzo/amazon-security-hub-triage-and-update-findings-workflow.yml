@@ -14,8 +14,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: securityHubApi
-  url: ../openapi/amazon-security-hub-openapi.yml
+- name: findingsApi
+  url: ../openapi/amazon-security-hub-findings-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: triage-and-update-findings

@@ -11,8 +11,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: securityHubApi
-  url: ../openapi/amazon-security-hub-openapi.yml
+- name: administrationApi
+  url: ../openapi/amazon-security-hub-administration-api-openapi.yml
+  type: openapi
+- name: standardsApi
+  url: ../openapi/amazon-security-hub-standards-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: enable-hub-and-review-standards
