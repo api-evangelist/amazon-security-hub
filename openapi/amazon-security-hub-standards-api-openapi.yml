@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Security Hub Administration Standards API
+  title: Amazon Security Hub Standards API
   description: Amazon Security Hub is a cloud security posture management service that aggregates security findings, performs best practice checks, and enables automated remediation across AWS accounts.
   version: '2018-10-26'
   contact:
